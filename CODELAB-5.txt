@@ -1,0 +1,69 @@
+import 'package:flutter/material.dart';
+import 'package:animations/animations.dart';
+
+void main() {
+  runApp(MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Material Motion Codelab',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
+      home: HomePage(),
+    );
+  }
+}
+
+class HomePage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Material Motion Codelab'),
+      ),
+      body: Center(
+        child: OpenContainer(
+          transitionType: ContainerTransitionType.fade,
+          transitionDuration: Duration(milliseconds: 500),
+          closedBuilder: (context, action) {
+            return GestureDetector(
+              onTap: action,
+              child: Container(
+                color: Colors.blue,
+                height: 50,
+                width: 80,
+                child: Center(
+                  child: Text(
+                    'Open',
+                    style: TextStyle(color: Colors.white),
+                  ),
+                ),
+              ),
+            );
+          },
+          openBuilder: (context, action) {
+            return DetailPage();
+          },
+        ),
+      ),
+    );
+  }
+}
+
+class DetailPage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Detail Page'),
+      ),
+      body: Center(
+        child: Text('Detail Page Content'),
+      ),
+    );
+  }
+}
